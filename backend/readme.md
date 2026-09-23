@@ -1,6 +1,6 @@
 # Backend (Redis + Typescript + Express)
 
-This project use express, express is a framework that makes routing easier used for building web application, combination of this with typescript that give defined data types on this projects and redis is a database, a noSql database in memory key values database, it’s quick to use and fast
+This project is built with Express (a lightweight framework for Node.js routing), TypeScript (for strict type safety), and Redis (an in-memory NoSQL key-value database used for lightning-fast caching and rate limiting).
 
 ## Structure of the project
 
@@ -27,7 +27,7 @@ export const getWeather = async (req:Request,res:Response)=>{
       const location = req.query.location
 
       if(!location){
-        return res.status(400).json({error:'please provided correct location'})
+        return res.status(400).json({error:'please provide correct location'})
       }
       
       const findCachedWeather = await clientRedis.get(`api/weather?location=${location}`)
@@ -60,7 +60,7 @@ export const getWeather = async (req:Request,res:Response)=>{
 **How Does Caching works?**
 1. You must use query to get the location that can be city and country for our weather API
 2. Check if redis have already stored the weather data inside, if it’s exist then redis should send those weather data and return weather values inside redis
-3. if not founded then use the api of openweather api
+3. if not found then use the api of openweather api
 4. then those openweather api result must be stored into redis database, and it must have a time limit in this case I use 3600 seconds or one hour
 5. it should return a json values that will be used for our client!
 

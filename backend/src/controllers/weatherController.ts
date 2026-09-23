@@ -10,7 +10,7 @@ export const getWeather = async (req:Request,res:Response)=>{
       const location = req.query.location
 
       if(!location){
-        return res.status(400).json({error:'please provided correct location'})
+        return res.status(400).json({error:'please provide a correct location'})
       }
       
       const findCachedWeather = await clientRedis.get(`api/weather?location=${location}`)

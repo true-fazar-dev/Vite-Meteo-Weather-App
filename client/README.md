@@ -1,12 +1,12 @@
-# Client (VITE + Typescript + React)
+## Client (Vite + TypeScript + React)
 
-for this client part of the project I use Vite with React. Vite provided Hot Module Replacement (HMR). Over native ES Modules, it can leverage the API to provide instant, precise update without reloading page or blowing away application state, in this project we used Vite with React
+The client-side application is built using **Vite**, **TypeScript**, and **React**. Vite leverages native ES Modules and Hot Module Replacement (HMR) to deliver instant, precise updates during development without reloading the page or resetting application state.
 
 ```
 src/
 ├── assets/                 # Images, icons, and static media
 ├── components/             # Reusable UI components
-│   └── icon-renderer.tsx   # Conditional switch-case component for rendering weather favicons (used in App.tsx)
+│   └── icon-renderer.tsx   # Conditional switch-case component for rendering weather FontAwesome (used in App.tsx)
 │   └── WeatherForecast.tsx # Forecast which inclue about five weather condition to be rendered on App.tsx
 │   └── WeatherHeader.tsx   # Header of the weather for App.tsx
 │   └── WeatherLoading.tsx  # Loading for the weather app project for App.tsx
@@ -18,11 +18,11 @@ src/
 
 ```
 
-**Components: icon-renderer.tsx**
-this is where a conditional switch case statement to ensure what icon it will render using favicon, used this for app.tsx
+**`components/icon-renderer.tsx`**
+Contains a conditional switch-case statement utilizing Font Awesome to dynamically render weather icons for `App.tsx`.
 
-**interfaces: weather.ts**
-this is where interface of weather that will use on useState weather data types, 
+**`interfaces/weather.ts`**
+Houses the TypeScript interfaces for weather data types utilized across application state (`useState`).
 
 ## Tech Stack & Libraries
     • Framework: React + TypeScript

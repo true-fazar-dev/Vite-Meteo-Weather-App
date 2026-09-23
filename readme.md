@@ -19,9 +19,11 @@ While a standard weather app only requires basic API fetching, this project was 
 
 ## Getting Started
 
-### Prerequisites
-* [Docker & Docker Compose](https://docs.docker.com/engine/install/) (Recommended)
-* Alternatively, **Node.js (v24+)** if running locally without containers.
+### prerequisites
+**make sure you have the following to install on your system before proceeding:**
+  * Node.js: Version 24.x (Recommended)
+  * Docker & Docker Compose (Optional, for containerized setup)
+  * npm (comes bundled with Node.js)
 
 ### Project Structure
 ```
@@ -36,68 +38,64 @@ While a standard weather app only requires basic API fetching, this project was 
 ```
 
 ## The Setup
-
-### prerequisites
-**make sure you have the following to install on your system before proceeding:**
-  * Node.js: Version 24.x (Recommended)
-  * Docker & Docker Compose (Optional, for containerized setup)
-  * npm (comes bundled with Node.js)
-
+ 
 ---
 ## Local host installation
 
-copy .env.example inside backend folder to .env
-
-```cp .env.example .env```
-
-after that you must setup your .env inside ! 
+Navigate to the backend directory and copy the example environment file
 
 ```
+cd backend
+cp .env.example .env
+```
+
+```open the .env file and set up the variable:``` 
+
+```bash
 PORT=3000
 NODE_ENV=development
 WEATHER_API_KEY=your_openweather_api_key_here
 REDIS_URL=redis://localhost:6379
 ```
 
-remember to put your open weather api key! login to https://openweathermap.org/ to get the key!
+> [!NOTE]
+> A valid OpenWeather API key is required. Get a free key at OpenWeather.
+ 
 
 ---
-## To download docker, 
+## Docker Installation 
 
-since I use debian I recommended you to go to this website :https://docs.docker.com/engine/install/debian/ 
+Ensure Docker and Docker Compose are installed on your system based on your operating system:
 
-if you use windows go to this website instead : https://docs.docker.com/desktop/
+* **Linux:** Install Docker Engine and Docker Compose using your distribution's package manager or the official [Docker Linux Installation Guide](https://docs.docker.com/engine/install/).
+* **Windows & macOS:** Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
-## setup your ENV
-
-```
-.
-├── assets
-├── backend
-├── client
-├── compose.yaml
-├── .env.example
-├── .gitignore
-└── readme.md
+Once installed, verify the installation by running:
+```bash
+docker compose version
 ```
 
-see that .env.example in the project repo you can copy that, you must copy and paste it and change the name of **.env.example** into **.env**
+## setup the env
 
-```cp .env.example .env```
-
-after that you must setup your .env inside ! 
+copy the example environment file
 
 ```
+cp .env.example .env
+```
+
+```open the .env file and set up the variable:``` 
+
+```bash
 PORT=3000
 NODE_ENV=development
 WEATHER_API_KEY=your_openweather_api_key_here
 REDIS_URL=redis://redis:6379
 ```
 
-now in this project you can setup **PORT,NODE_ENV,REDIS_URL** to whatever you want but you must have **WEATHER_API_KEY** for this project to work, you must login into openweatherapi website and get the key there!
+> [!NOTE]
+> A valid OpenWeather API key is required. Get a free key at OpenWeather.
 
 ## Run your docker
-
-After setting up your .ENV, make sure you’re in the roots that have compose.yaml, type in your command :
+After setting up .ENV, run docker into command:
 <br>
-```docker compose up -d```
+```docker compose up -d``` 
