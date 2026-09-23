@@ -36,12 +36,17 @@ While a standard weather app only requires basic API fetching, this project was 
 ```
 
 ## The Setup
->[!NOTE]
->To start this project I recommended you to download docker before running this project, or you can just use simple npm install on backend and client then use npm run dev. but you need to use Node 24 to run this project
+
+### prerequisites
+**make sure you have the following to install on your system before proceeding:**
+  * Node.js: Version 24.x (Recommended)
+  * Docker & Docker Compose (Optional, for containerized setup)
+  * npm (comes bundled with Node.js)
+
 ---
 ## Local host installation
 
-you must copy .env.example inside backend folder to .env
+copy .env.example inside backend folder to .env
 
 ```cp .env.example .env```
 
