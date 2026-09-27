@@ -99,3 +99,11 @@ REDIS_URL=redis://redis:6379
 After setting up .ENV, run docker into command:
 <br>
 ```docker compose up -d``` 
+
+## References
+- **UI Inspiration:** https://freefrontend.com/tailwind-weather-widgets/
+- **CSS framework:** https://tailwindcss.com
+- **redis rate limit:** https://redis.io/docs/latest/develop/use-cases/rate-limiter/
+- **redis caching:** https://blog.stackademic.com/building-a-weather-app-with-redis-caching-using-node-js-and-express-51088d1146b8
+- **backend express:** https://blog.logrocket.com/express-typescript-node/
+
