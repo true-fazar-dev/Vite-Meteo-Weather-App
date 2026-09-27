@@ -1,9 +1,6 @@
 import { Request,Response} from "express";
-import dotenv from 'dotenv'
-
+ 
 import { clientRedis } from "../redis/client";
-
-dotenv.config()
  
 
 export const getWeather = async (req:Request,res:Response)=>{

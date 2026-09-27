@@ -4,8 +4,11 @@ import config from './config/config'
 import rateLimit from 'express-rate-limit' 
 import cors  from 'cors'
 import RedisStore from 'rate-limit-redis'
+import dotenv from 'dotenv'
 import { clientRedis } from './redis/client'
 
+
+dotenv.config()
  
 const app = express()
  
