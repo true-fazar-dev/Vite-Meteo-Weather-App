@@ -2,11 +2,7 @@
 
 A lightning-fast, lightweight weather application built with the OpenWeather API. It features Redis caching to optimize API calls, rate-limiting to prevent abuse, and a clean separation of concerns containerized via Docker.
 
-<p align="center">
-  <a href="https://www.youtube.com/playlist?list=PLOeFzbNWqXaE">
-    <img src="https://youtube.com" alt="Watch the Playlist" width="600">
-  </a>
-</p>
+[https://www.youtube.com/watch?v=GQFwjFh9cFc&t=23s](https://www.youtube.com/watch?v=GQFwjFh9cFc&t=23s)
 
 <h1 align='center'>
     <img src="./assets/images/weather-app.png" />
