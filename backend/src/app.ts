@@ -6,7 +6,7 @@ import cors  from 'cors'
 import RedisStore from 'rate-limit-redis'
 import dotenv from 'dotenv'
 import { clientRedis } from './redis/client'
-
+import { errorHandler } from './middleware/error'
 
 dotenv.config()
  
@@ -37,6 +37,8 @@ app.use(express.urlencoded({extended:false}))
 app.use(limiter)
 
 app.use('/api/weather',router)
+
+app.use(errorHandler)
 
 app.listen(config.port,()=>{
     console.log(`server is running on port ${config.port}`)

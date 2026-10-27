@@ -1,13 +1,15 @@
-import { Request,Response} from "express";
+import { Request,Response,NextFunction} from "express";
  
 import { clientRedis } from "../redis/client";
+import BadRequestError from "../errors/BadRequest";
+import NotFoundError from "../errors/NotFoundError";
  
 
-export const getWeather = async (req:Request,res:Response)=>{
+export const getWeather = async (req:Request,res:Response,next:NextFunction)=>{
       const location = req.query.location
 
       if(!location){
-        return res.status(400).json({error:'please provide a correct location'})
+        throw new BadRequestError({message:'city is required!',logging:true})
       }
       
       const findCachedWeather = await clientRedis.get(`api/weather?location=${location}`)
@@ -20,7 +22,7 @@ export const getWeather = async (req:Request,res:Response)=>{
           const getWeather = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.WEATHER_API_KEY}`)
 
           if(!getWeather.ok){
-              return res.status(400).json({error:'wrong weather api credentials or wrong location!'})
+              throw new NotFoundError({message:'city not found',logging:true})
           }
 
           const weatherData = await getWeather.json()
@@ -29,7 +31,7 @@ export const getWeather = async (req:Request,res:Response)=>{
           return res.status(200).json(weatherData)
         
         }catch(err){
-            return res.status(400).json(err)
+          next(err)
         }
   }
     
