@@ -18,9 +18,9 @@ const limiter = rateLimit({
     limit:50,
     standardHeaders:true,  
     ipv6Subnet:56,
-    store: new RedisStore({
+    store: clientRedis.isReady ? new RedisStore({
         sendCommand: (...args: string[]) => clientRedis.sendCommand(args),
-    })  
+    }):undefined  
 })
 
 //Restrict public access, too only exclusively to the local client 

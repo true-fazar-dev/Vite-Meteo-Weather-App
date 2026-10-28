@@ -12,22 +12,33 @@ export const getWeather = async (req:Request,res:Response,next:NextFunction)=>{
         throw new BadRequestError({message:'city is required!',logging:true})
       }
       
-      const findCachedWeather = await clientRedis.get(`api/weather?location=${location}`)
-
-      // Serve from cache to bypass external rate limits and speed up response times
-      if(findCachedWeather != null){
-        return res.status(200).json(JSON.parse(findCachedWeather))        
-      }else{               
+      try{
+        // Serve from cache to bypass external rate limits and speed up response times     
+         const findCachedWeather = await clientRedis.get(`api/weather?location=${location}`)
+          if(findCachedWeather != null){
+            return res.status(200).json(JSON.parse(findCachedWeather))    
+          }
+      }catch(redisError){
+          console.warn('redis cache is unavailable')
+      }
+                     
         try{
           const getWeather = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.WEATHER_API_KEY}`)
 
           if(!getWeather.ok){
+
+              if(clientRedis.isReady){
+                await clientRedis.setEx(`api/weather?location=${location}`,60,JSON.stringify({error:'wrong weather location'}))
+              }
               throw new NotFoundError({message:'city not found',logging:true})
           }
 
           const weatherData = await getWeather.json()
           // Cache the fresh response for 1 hour to reduce third-party load
-          await clientRedis.setEx(`api/weather?location=${location}`,3600,JSON.stringify(weatherData))        
+
+          if(clientRedis.isReady){
+            await clientRedis.setEx(`api/weather?location=${location}`,3600,JSON.stringify(weatherData))        
+          }
           return res.status(200).json(weatherData)
         
         }catch(err){
@@ -35,4 +46,3 @@ export const getWeather = async (req:Request,res:Response,next:NextFunction)=>{
         }
   }
     
-}
