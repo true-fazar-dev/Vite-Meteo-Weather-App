@@ -17,10 +17,12 @@ export const getWeather = async (req:Request,res:Response,next:NextFunction)=>{
       
       const location = city.data.toLowerCase()
       const cacheKey = `api/weather?location=${location}`
+ 
+      
       try{
         // Serve from cache to bypass external rate limits and speed up response times     
         if(clientRedis.isReady){
-           const findCachedWeather = await clientRedis.get(cacheKey)
+          const findCachedWeather = await clientRedis.get(cacheKey)
             
            if(findCachedWeather != null){
               const parseData = JSON.parse(findCachedWeather)
