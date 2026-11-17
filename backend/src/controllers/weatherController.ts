@@ -3,6 +3,7 @@ import { CITY_SCHEMA } from "../schema/city";
 import { clientRedis } from "../redis/client";
 import BadRequestError from "../errors/BadRequest";
 import NotFoundError from "../errors/NotFoundError";
+import { ResponseHandler } from "../response-handler/responseHandler";
  
 
 export const getWeather = async (req:Request,res:Response,next:NextFunction)=>{
@@ -31,9 +32,8 @@ export const getWeather = async (req:Request,res:Response,next:NextFunction)=>{
             
                 return res.status(404).json(parseData)
               }
-              
-
-              return res.status(200).json(parseData)    
+                 
+               return ResponseHandler.ok(res,200,'cached weather has been called!',parseData)
             }
         } 
           
@@ -59,8 +59,8 @@ export const getWeather = async (req:Request,res:Response,next:NextFunction)=>{
           if(clientRedis.isReady){
             await clientRedis.setEx(`api/weather?location=${location}`,3600,JSON.stringify(weatherData))        
           }
-          return res.status(200).json(weatherData)
-        
+     
+          ResponseHandler.ok(res,200,'weather has been fetched',weatherData)
         }catch(err){
           next(err)
         }

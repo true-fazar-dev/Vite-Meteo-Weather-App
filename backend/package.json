@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "jest",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'tsx' src/app.ts"
+    "test": "jest  --forceExit --detectOpenHandles",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'tsx' src/server.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,5 @@
 export interface Weather{
+  data:{
   city:{
     name:string,
     country:string
@@ -16,5 +17,5 @@ export interface Weather{
     }>
     dt_txt:string
   }>
-  
+}
 }

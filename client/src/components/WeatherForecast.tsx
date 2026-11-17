@@ -4,7 +4,7 @@ interface WeatherProps{
     weather:Weather
 }
 export default function WeatherForecast({weather}:WeatherProps){
-      const weatherForecast = weather.list.slice(1,6)
+      const weatherForecast = weather.data.list.slice(1,6)
     return(
         <>
         <div className="text-xs text-white mb-1">Today</div>

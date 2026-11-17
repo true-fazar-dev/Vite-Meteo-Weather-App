@@ -1,14 +1,13 @@
 import express from 'express'
 import router from './routes/route'
-import config from './config/config'
+ 
 import rateLimit from 'express-rate-limit' 
 import cors  from 'cors'
 import RedisStore from 'rate-limit-redis'
-import dotenv from 'dotenv'
+ 
 import { clientRedis } from './redis/client'
 import { errorHandler } from './middleware/error'
-
-dotenv.config()
+ 
  
 const app = express()
  
@@ -40,8 +39,6 @@ app.use('/api/weather',router)
 
 app.use(errorHandler)
 
-app.listen(config.port,()=>{
-    console.log(`server is running on port ${config.port}`)
-})
+ 
 
 export default app

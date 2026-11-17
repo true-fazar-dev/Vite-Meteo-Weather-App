@@ -40,18 +40,21 @@ function App() {
       const weatherData = await fetch(`http://localhost:3000/api/weather?location=${weatherQuery}`)
       
       if(!weatherData.ok){
-        throw new Error('city not found')
+        setErrorMessage('city is not found!')
          
+      }else{
+        const res = await weatherData.json()
+        setWeather(res)
+        setLocation(res.data.city.name)
+        setErrorMessage(null)
+        setDataIsLoaded(true)
+        form.reset()
       }
 
-      const res = await weatherData.json()
-      setWeather(res)
-      setLocation(res.city.name)
-      setDataIsLoaded(true)
-      form.reset()
+       
 
-      }catch(err:any){
-        setErrorMessage(err.message)
+      }catch(error:any){
+        setErrorMessage(error.message)
       }
     }
   
@@ -61,7 +64,7 @@ function App() {
       <WeatherLoading errorMessage={errorMessage}/> 
     )
   }
- 
+  
   return (
   <div className="flex flex-col items-center min-h-screen bg-gray-200 justify-center py-10 font-sans">
       <div className="bg-gradient-to-br from-indigo-600 to-purple-300 rounded-xl p-4 w-80 shadow">
@@ -70,6 +73,7 @@ function App() {
             <div className="p-1 mb-1">
             <WeatherForecast weather={weather}/>
             <div className="text-xs text-white">
+               <div className="p-1 m-1">{errorMessage}</div> 
               <form onSubmit={handleSubmit}>
                    <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                       <div className="relative">
