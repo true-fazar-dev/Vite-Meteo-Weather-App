@@ -4,6 +4,7 @@ import type { Weather } from "./interfaces/weather"
 import WeatherLoading from "./components/WeatherLoading"
 import WeatherHeader from "./components/WeatherHeader"
 import WeatherForecast from "./components/WeatherForecast" 
+import { WEATHER_SCHEMA } from "./schema/weatherSchema"
 
 function App() {
   const [weather,setWeather] = useState<Weather | null>(null)
@@ -33,8 +34,8 @@ function App() {
      
     const form = e.target
     const formData = new FormData(form)
-    const weatherQuery = formData.get("location")
-    
+    const weatherQueryResult = formData.get("location")
+    const weatherQuery = WEATHER_SCHEMA.parse(weatherQueryResult)
     
     try{
       const weatherData = await fetch(`http://localhost:3000/api/weather?location=${weatherQuery}`)
